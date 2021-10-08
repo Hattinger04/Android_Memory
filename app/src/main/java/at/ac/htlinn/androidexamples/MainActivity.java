@@ -1,3 +1,7 @@
+/*
+ * Taschenrechner von Simon Greiderer (github: Hattinger04)
+ */
+
 package at.ac.htlinn.androidexamples;
 
 import androidx.appcompat.app.AppCompatActivity;
