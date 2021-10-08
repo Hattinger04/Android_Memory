@@ -65,6 +65,5 @@ public class SimpleCalculatorActivity extends AppCompatActivity {
             all.append(op1 + " " + oper + " " + op2 + " = " + res + "\n");
             TextView resV = findViewById(R.id.result);
             resV.setText(res +"");
-
     }
 }

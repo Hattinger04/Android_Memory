@@ -3,17 +3,7 @@ package at.ac.htlinn.androidexamples;
 import java.util.ArrayList;
 import java.util.List;
 
-import at.ac.htlinn.androidexamples.concurrent.ConcurrentActivity;
-import at.ac.htlinn.androidexamples.concurrent.asynctask.SimpleAsyncTaskActivity;
-import at.ac.htlinn.androidexamples.googlemaps.SimpleMapsActivity;
-import at.ac.htlinn.androidexamples.location.SimpleLocationActivity;
-import at.ac.htlinn.androidexamples.sensor.LightSensorActivity;
-import at.ac.htlinn.androidexamples.sensor.OrientationSensorBallActivity;
-import at.ac.htlinn.androidexamples.sensor.ProximitySensorActivity;
-import at.ac.htlinn.androidexamples.sensor.SensorActivity;
-import at.ac.htlinn.androidexamples.sensor.StepCounterActivity;
 import at.ac.htlinn.androidexamples.simplecalculator.SimpleCalculatorActivity;
-import at.ac.htlinn.androidexamples.table.TableInViewActivity;
 
 public class ActivityEntry {
     private String name;
@@ -56,10 +46,6 @@ public class ActivityEntry {
     {
         ArrayList<ActivityEntry> all = new ArrayList<ActivityEntry>();
         all.add(new ActivityEntry("...please select the demo...", null));
-        all.add(new ActivityEntry("Orientation Sensor: Ball game", OrientationSensorBallActivity.class));
-        all.add(new ActivityEntry("Step Counter", StepCounterActivity.class));
-        all.add(new ActivityEntry("Proximity Sensor", ProximitySensorActivity.class));
-        all.add(new ActivityEntry("Light Sensor", LightSensorActivity.class));
 
         return all;
     }
@@ -71,7 +57,6 @@ public class ActivityEntry {
     {
         ArrayList<ActivityEntry> all = new ArrayList<ActivityEntry>();
         all.add(new ActivityEntry("...please select the demo...", null));
-        all.add(new ActivityEntry("Simple calls using AsyncTask", SimpleAsyncTaskActivity.class));
         return all;
     }
 }

@@ -12,10 +12,10 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="50dp"
+        android:divider="@drawable/divider"
         android:orientation="vertical"
         android:showDividers="middle"
-        android:divider="@drawable/divider"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,17 +63,18 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@android:color/holo_orange_light"
-            android:paddingHorizontal="5pt"
-            android:focusableInTouchMode="true"
             android:descendantFocusability="blocksDescendants"
-            android:paddingVertical="5pt"/>
+            android:focusableInTouchMode="true"
+            android:paddingHorizontal="5pt"
+            android:paddingVertical="5pt"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/textView2"
-            android:scrollbars ="vertical"
-            android:lines="5"
             android:layout_width="match_parent"
-            android:layout_height="210dp"
-          />
+            android:layout_height="256dp"
+            android:lines="4"
+            android:scrollbars="vertical"
+            android:textSize="15dp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
