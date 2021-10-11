@@ -72,8 +72,10 @@
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
-            android:layout_height="256dp"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
             android:lines="4"
+            android:maxLines="1000000"
             android:scrollbars="vertical"
             android:textSize="15dp" />
     </LinearLayout>
