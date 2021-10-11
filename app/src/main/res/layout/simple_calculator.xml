@@ -29,7 +29,7 @@
             android:clickable="false"
             android:contentDescription="Zahl 1 eingeben"
             android:contextClickable="true"
-            android:inputType="numberDecimal"
+            android:inputType="numberDecimal|numberSigned"
             android:paddingHorizontal="5pt"
             tools:ignore="EditableContentDescCheck" />
 
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@android:color/holo_orange_light"
-            android:inputType="numberDecimal"
+            android:inputType="numberDecimal|numberSigned"
             android:paddingHorizontal="5pt"
             tools:ignore="SpeakableTextPresentCheck" />
 

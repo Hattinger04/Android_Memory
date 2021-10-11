@@ -55,7 +55,7 @@ public class SimpleCalculatorActivity extends AppCompatActivity {
                     break;
                 case "^": res = Math.pow(op1, op2); break;
                 case "√":
-                    if(op1 <= 0 || op2 <= 0) {
+                    if(op1 <= 0 || op2 == 0) {
                         Snackbar.make(findViewById(R.id.oper), "Nur natürliche Zahlen ohne die Null!", Snackbar.LENGTH_LONG).show();
                         return;
                     }
