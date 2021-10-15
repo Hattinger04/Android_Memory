@@ -28,11 +28,11 @@ public class MemoryActivity extends AppCompatActivity {
     }
 
     private ImageButton generateButton(Position position) {
-
+        return null;
     }
 
     private int[] getPicsArray() {
-
+        return null;
     }
 
     public void onClick(View view) {
