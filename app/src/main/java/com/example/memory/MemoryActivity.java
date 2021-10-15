@@ -2,6 +2,7 @@ package com.example.memory;
 
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
@@ -33,9 +34,8 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_memory);
-
+        buttons = new ImageButton[5][7];
         generateGrid(5, 7);
-
     }
 
     private void generateGrid(int nrCols, int nrRows) {
@@ -45,7 +45,6 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-
     private TableRow generateAndAddRows(int rows, int nrCols) {
         TableRow.LayoutParams tableRowParams=
                 new TableRow.LayoutParams
@@ -54,7 +53,7 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         TableRow tr = new TableRow(this);
         tr.setLayoutParams(tableRowParams);
         for(int i = 0; i < nrCols; i++) {
-            tr.addView(generateButton(new Position(rows, nrCols)));
+            tr.addView(generateButton(new Position(rows, i)));
         }
         return tr;
     }
@@ -64,6 +63,7 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         button.setImageResource(R.drawable.back);
         button.setTag(position);
         button.setOnClickListener(this);
+        buttons[position.x][position.y] = button;
         return button;
     }
 
@@ -96,7 +96,18 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
+        ImageButton button = (ImageButton) view;
+        for(int i=0; i< buttons.length;i++){
+            for(int j=0; j<buttons[i].length; j++){
+               if(buttons[i][j].equals(button)) {
+                   Log.d("Button", "Gefunden");
+               }
+            }
+        }
+        //button.setImageResource(getPicsArray()[1]);
 
+        //position = previousCard;
+        //closeCards
     }
 
     private void closeCards(Position pos1, Position pos2)
@@ -115,5 +126,6 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         Timer timer = new Timer();
         timer.schedule(new CloseTask(),1000);
     }
+
 
 }
