@@ -24,16 +24,14 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
     private Position previousCard;
     private ImageButton[][] buttons;
 
-    /* Snackbar:
-        View root = findViewById(R.id.root);
-        Snackbar.make(root, "Text", Snackbar.LENGTH_LONG).show();
-    */
+    // TODO: Muss nächstes mal die IDs der einzelnen Bilder setzen!
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_memory);
+        field = new Playground(7,5);
         buttons = new ImageButton[7][5];
         generateGrid(7, 5);
     }
@@ -98,17 +96,33 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         ImageButton button = (ImageButton) view;
+        Position pos = null;
         for(int i=0; i< buttons.length;i++){
             for(int j=0; j<buttons[i].length; j++){
                if(buttons[i][j].equals(button)) {
-                   Log.d("Button", "Gefunden");
+                   pos = new Position(i, j);
                }
             }
         }
-        //button.setImageResource(getPicsArray()[1]);
+        if(pos == null) {
+            throw new RuntimeException("Darf nicht passieren");
+        }
+        button.setImageResource(getPicsArray()[field.getCard(pos).getValue()]);
 
-        //position = previousCard;
-        //closeCards
+        if(previousCard != null) {
+            if(field.isPair(pos, previousCard)) {
+                if(field.finished()) {
+                    View root = findViewById(R.id.root);
+                    Snackbar.make(root, "Das Spiel ist aus!", Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+            } else {
+                closeCards(pos, previousCard);
+            }
+            previousCard = null;
+        } else {
+            previousCard = pos;
+        }
     }
 
     private void closeCards(Position pos1, Position pos2)

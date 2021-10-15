@@ -36,6 +36,8 @@ public class Playground {
 
     public boolean isPair(Position pos1, Position pos2) {
         if(getCard(pos1).getValue() == getCard(pos2).getValue()) {
+            score[whosOnTurn] = score[whosOnTurn] + 1;
+
             return true;
         }
         return false;
