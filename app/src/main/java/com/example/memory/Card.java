@@ -11,4 +11,12 @@ public class Card {
                 ", value=" + value +
                 '}';
     }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public int getValue() {
+        return value;
+    }
 }

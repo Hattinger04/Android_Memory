@@ -26,7 +26,7 @@ public class Playground {
     }
 
     public boolean isPair(Position pos1, Position pos2) {
-        if(getCard(pos1).equals(getCard(pos2))) {
+        if(getCard(pos1).getValue() == getCard(pos2).getValue()) {
             return true;
         }
         return false;
