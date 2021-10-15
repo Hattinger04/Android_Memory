@@ -3,6 +3,8 @@ package com.example.memory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MemoryActivity extends AppCompatActivity {
+public class MemoryActivity extends AppCompatActivity implements View.OnClickListener{
 
     private int[] pics;
     private Playground field;
@@ -20,20 +22,41 @@ public class MemoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        field = new Playground(6, 7);
+        setContentView(R.layout.acitivity_memory);
+
+        TableLayout playField = findViewById(R.id.playfield);
+        generateGrid(6, 7);
+
+
     }
 
     private void generateGrid(int nrCols, int nrRows) {
+        for(int i=0; i < nrCols;i++){
+            for(int j=0; j < nrRows; j++){
+                generateAndAddRows(i, j);
+            }
+        }
 
     }
 
     private void generateAndAddRows(int rows, int nrCols) {
-
+        TableRow.LayoutParams tableRowParams=
+                new TableRow.LayoutParams
+                        (TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.MATCH_PARENT);
+        TableRow tr = new TableRow(this);
+        tr.setLayoutParams(tableRowParams);
+        // TODO: generateButton aufrufen?
+        for(int i = 0; i < nrCols; i++) {
+            tr.addView(generateButton(new Position(rows, i)));
+        }
     }
 
     private ImageButton generateButton(Position position) {
-        // TODO: zurzeit nur zurückgeben, noch erstellen schreiben!
-        return buttons[position.x][position.y];
+        ImageButton button = new ImageButton(this);
+        button.setImageResource(R.drawable.back);
+        button.setTag(position);
+        button.setOnClickListener(this);
+        return button;
     }
 
     public static int[] getPicsArray() {
@@ -63,6 +86,7 @@ public class MemoryActivity extends AppCompatActivity {
         return c;
     }
 
+    @Override
     public void onClick(View view) {
 
     }
