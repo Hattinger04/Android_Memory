@@ -1,13 +1,17 @@
 package com.example.memory;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -19,26 +23,35 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
     private Position previousCard;
     private ImageButton[][] buttons;
 
+    /* Snackbar:
+        View root = findViewById(R.id.root);
+        Snackbar.make(root, "Text", Snackbar.LENGTH_LONG).show();
+    */
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_memory);
 
-        TableLayout playField = findViewById(R.id.playfield);
-        generateGrid(6, 7);
+        TextView textView = findViewById(R.id.feedback);
+        textView.setMovementMethod(new ScrollingMovementMethod());
 
+
+        TableLayout playField = findViewById(R.id.playfield);
+        generateGrid(5, 6);
 
     }
 
     private void generateGrid(int nrCols, int nrRows) {
-        for(int i=0; i < nrCols;i++){
-            for(int j=0; j < nrRows; j++){
+        for(int i=0; i <= nrCols;i++){
+            for(int j=0; j <= nrRows; j++){
                 generateAndAddRows(i, j);
             }
         }
 
     }
-
+    int counter = 0;
     private void generateAndAddRows(int rows, int nrCols) {
         TableRow.LayoutParams tableRowParams=
                 new TableRow.LayoutParams
@@ -46,9 +59,8 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         TableRow tr = new TableRow(this);
         tr.setLayoutParams(tableRowParams);
         // TODO: generateButton aufrufen?
-        for(int i = 0; i < nrCols; i++) {
-            tr.addView(generateButton(new Position(rows, i)));
-        }
+        tr.addView(generateButton(new Position(rows, nrCols)));
+
     }
 
     private ImageButton generateButton(Position position) {
