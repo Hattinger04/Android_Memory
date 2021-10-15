@@ -34,33 +34,29 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_memory);
 
-        TextView textView = findViewById(R.id.feedback);
-        textView.setMovementMethod(new ScrollingMovementMethod());
-
-
-        TableLayout playField = findViewById(R.id.playfield);
-        generateGrid(5, 6);
+        generateGrid(5, 7);
 
     }
 
     private void generateGrid(int nrCols, int nrRows) {
-        for(int i=0; i <= nrCols;i++){
-            for(int j=0; j <= nrRows; j++){
-                generateAndAddRows(i, j);
-            }
+        TableLayout playField = findViewById(R.id.playfield);
+        for(int i=0; i < nrRows;i++) {
+                playField.addView(generateAndAddRows(i, nrCols));
         }
-
     }
-    int counter = 0;
-    private void generateAndAddRows(int rows, int nrCols) {
+
+
+    private TableRow generateAndAddRows(int rows, int nrCols) {
         TableRow.LayoutParams tableRowParams=
                 new TableRow.LayoutParams
                         (TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.MATCH_PARENT);
+
         TableRow tr = new TableRow(this);
         tr.setLayoutParams(tableRowParams);
-        // TODO: generateButton aufrufen?
-        tr.addView(generateButton(new Position(rows, nrCols)));
-
+        for(int i = 0; i < nrCols; i++) {
+            tr.addView(generateButton(new Position(rows, nrCols)));
+        }
+        return tr;
     }
 
     private ImageButton generateButton(Position position) {
