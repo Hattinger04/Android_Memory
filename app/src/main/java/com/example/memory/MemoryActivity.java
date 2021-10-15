@@ -34,11 +34,11 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_memory);
-        buttons = new ImageButton[5][7];
-        generateGrid(5, 7);
+        buttons = new ImageButton[7][5];
+        generateGrid(7, 5);
     }
 
-    private void generateGrid(int nrCols, int nrRows) {
+    private void generateGrid(int nrRows, int nrCols) {
         TableLayout playField = findViewById(R.id.playfield);
         for(int i=0; i < nrRows;i++) {
                 playField.addView(generateAndAddRows(i, nrCols));
@@ -64,6 +64,7 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         button.setTag(position);
         button.setOnClickListener(this);
         buttons[position.x][position.y] = button;
+        Log.d("Pos", position.x + " " + position.y);
         return button;
     }
 
