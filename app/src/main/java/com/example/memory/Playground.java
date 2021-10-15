@@ -5,10 +5,12 @@ import java.util.Arrays;
 public class Playground {
 
     private Card[][] cards;
+    // TODO: wie viel Spieler sind es? Wo abfragen?
     private int whosOnTurn;
     private int[] score;
 
     public Playground(int x, int y) {
+        cards = new Card[x][y];
 
     }
 
@@ -17,12 +19,19 @@ public class Playground {
     }
 
     public Card play(Position position) {
+        // TODO: kommt sehr wahrscheinlich noch was
         return getCard(position);
     }
 
     public boolean finished() {
-        // TODO: Array durchlaufen? visible abfragen
-        return false;
+        for(int i=0; i< cards.length;i++){
+            for(int j=0; j<cards[i].length; j++){
+                if(!cards[i][j].isVisible()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public boolean isPair(Position pos1, Position pos2) {
@@ -36,8 +45,7 @@ public class Playground {
         return cards[position.x][position.y];
     }
 
-    public int getNrPairs() {
-        // TODO: Funktioniert dies bei 2 Dimensionalem Array gleich?
+    private int getNrPairs() {
         return cards.length / 2;
     }
 
