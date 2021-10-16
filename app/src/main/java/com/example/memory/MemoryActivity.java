@@ -31,9 +31,9 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_memory);
-        field = new Playground(7,5);
-        buttons = new ImageButton[7][5];
-        generateGrid(7, 5);
+        field = new Playground(6,5);
+        buttons = new ImageButton[6][5];
+        generateGrid(6, 5);
     }
 
     private void generateGrid(int nrRows, int nrCols) {
