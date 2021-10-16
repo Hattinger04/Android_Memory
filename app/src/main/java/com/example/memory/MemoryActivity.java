@@ -107,6 +107,8 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         if(pos == null) {
             throw new RuntimeException("Darf nicht passieren");
         }
+
+       /*
         button.setImageResource(getPicsArray()[field.getCard(pos).getValue()]);
 
         if(previousCard != null) {
@@ -123,6 +125,8 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             previousCard = pos;
         }
+
+        */
     }
 
     private void closeCards(Position pos1, Position pos2)

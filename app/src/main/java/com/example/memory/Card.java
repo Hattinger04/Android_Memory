@@ -19,4 +19,12 @@ public class Card {
     public int getValue() {
         return value;
     }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
 }
