@@ -32,13 +32,13 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_memory);
-
+        getExtras();
         pics = getPicsArray();
         field = new Playground(feld[0],feld[1]);
-        buttons = new ImageButton[feld[0]][cofeld[1]];
+        field.setScore(new int[anzSpieler]);
+        buttons = new ImageButton[feld[0]][feld[1]];
         generateGrid(feld[0],feld[1]);
     }
-
 
     public void getExtras() {
         Bundle extras = getIntent().getExtras();
@@ -48,7 +48,7 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
             feld[1] = Integer.parseInt(extras.getString("feld").substring(1,2));
             return;
         }
-        throw new RuntimeException("Sollte nicht passieren");
+        throw new RuntimeException("Sollte nicht passieren!");
     }
 
     private void generateGrid(int nrRows, int nrCols) {
@@ -129,6 +129,7 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         button.setImageResource(pics[field.getCard(pos).getValue()]);
 
         if(previousCard != null) {
+            field.switchPlayer();
             setAcitiveButtons(false);
             if(field.isPair(pos, previousCard)) {
                 if(field.finished()) {
@@ -136,6 +137,7 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
                     Snackbar.make(root, "Das Spiel ist aus!", Snackbar.LENGTH_LONG).show();
                     return;
                 }
+                setAcitiveButtons(true);
             } else {
                 closeCards(pos, previousCard);
             }
@@ -143,8 +145,6 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             previousCard = pos;
         }
-
-
     }
 
     private void setAcitiveButtons(boolean active) {
@@ -154,7 +154,6 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
     }
-
 
     private void closeCards(Position pos1, Position pos2)
     {
@@ -173,6 +172,4 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         Timer timer = new Timer();
         timer.schedule(new CloseTask(),1000);
     }
-
-
 }

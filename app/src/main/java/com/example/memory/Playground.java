@@ -4,20 +4,18 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 public class Playground {
 
     private Card[][] cards;
-    // TODO: User kann Anzahl an Spielern noch nicht eingeben (selber schreiben!)
     private int whosOnTurn;
     private int[] score;
 
     public Playground(int x, int y) {
         cards = new Card[x][y];
-        score = new int[5];
+        whosOnTurn = 0;
         init();
     }
 
@@ -44,10 +42,13 @@ public class Playground {
 
     }
 
-    // TODO: was macht diese Methode?
-    public Card play(Position position) {
-
-        return getCard(position);
+    // TODO: eigentlich "play" Methode, war aber verwirrt, was diese Methode machen soll?
+    public void switchPlayer() {
+        if(whosOnTurn > score.length) {
+            whosOnTurn = 1;
+        } else {
+            whosOnTurn++;
+        }
     }
 
     public boolean finished() {
@@ -74,6 +75,10 @@ public class Playground {
 
     public Card getCard(Position position) {
         return cards[position.x][position.y];
+    }
+
+    public void setScore(int[] score) {
+        this.score = score;
     }
 
     @Override
