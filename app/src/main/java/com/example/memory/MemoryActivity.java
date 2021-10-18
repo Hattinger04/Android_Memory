@@ -29,9 +29,9 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_memory);
         pics = getPicsArray();
-        field = new Playground(6,5);
-        buttons = new ImageButton[6][5];
-        generateGrid(6, 5);
+        field = new Playground(2,5);
+        buttons = new ImageButton[2][5];
+        generateGrid(2, 5);
     }
 
     private void generateGrid(int nrRows, int nrCols) {
@@ -106,6 +106,9 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
             throw new RuntimeException("Darf nicht passieren");
         }
 
+        if(field.getCard(pos).isVisible()) {
+            return;
+        }
 
         button.setImageResource(pics[field.getCard(pos).getValue()]);
 

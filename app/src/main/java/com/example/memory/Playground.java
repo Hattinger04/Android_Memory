@@ -17,8 +17,8 @@ public class Playground {
 
     public Playground(int x, int y) {
         cards = new Card[x][y];
+        score = new int[5];
         init();
-
     }
 
     public void init() {
@@ -33,10 +33,6 @@ public class Playground {
 
         Collections.shuffle(liste);
 
-        for (Integer list: liste) {
-            Log.d("Count", " " + list);
-        }
-
         for(int i=0; i < cards.length;i++){
             for(int j=0; j < cards[i].length; j++) {
                 cards[i][j] = new Card();
@@ -49,7 +45,7 @@ public class Playground {
     }
 
     public Card play(Position position) {
-        // TODO: kommt sehr wahrscheinlich noch was
+
         return getCard(position);
     }
 
@@ -65,21 +61,18 @@ public class Playground {
     }
 
     public boolean isPair(Position pos1, Position pos2) {
-       /* if(getCard(pos1).getValue() == getCard(pos2).getValue()) {
+        if(getCard(pos1).getValue() == getCard(pos2).getValue()) {
             score[whosOnTurn] = score[whosOnTurn] + 1;
+            getCard(pos1).setVisible(true);
+            getCard(pos2).setVisible(true);
             return true;
         }
         return false;
-        */
-        return true;
+
     }
 
     public Card getCard(Position position) {
         return cards[position.x][position.y];
-    }
-
-    private int getNrPairs() {
-        return cards.length / 2;
     }
 
     @Override
