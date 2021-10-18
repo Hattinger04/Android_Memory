@@ -4,8 +4,15 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.stream.Stream;
 
 public class Playground {
 
@@ -44,8 +51,8 @@ public class Playground {
 
     // TODO: eigentlich "play" Methode, war aber verwirrt, was diese Methode machen soll?
     public void switchPlayer() {
-        if(whosOnTurn > score.length) {
-            whosOnTurn = 1;
+        if(whosOnTurn >= score.length - 1) {
+            whosOnTurn = 0;
         } else {
             whosOnTurn++;
         }
@@ -88,5 +95,19 @@ public class Playground {
                 ", whosOnTurn=" + whosOnTurn +
                 ", score=" + Arrays.toString(score) +
                 '}';
+    }
+
+    public HashMap<Set<Integer>, Integer> getWinner() {
+        int value = Integer.MIN_VALUE;
+        HashMap rangliste = new HashMap<String, Integer>();
+        for(int i = 0; i < score.length; i++) {
+            rangliste.put(i + 1, score[i]);
+        }
+
+        HashMap<Set<Integer>,Integer> sorted =
+                (HashMap<Set<Integer>, Integer>) rangliste.entrySet().stream()
+                        .sorted(Map.Entry.comparingByValue());
+
+        return sorted;
     }
 }

@@ -42,10 +42,11 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
 
     public void getExtras() {
         Bundle extras = getIntent().getExtras();
+        feld = new int[2];
         if(extras != null) {
             anzSpieler = Integer.parseInt(extras.getString("anzSpieler"));
             feld[0] = Integer.parseInt(extras.getString("felder").substring(0,1));
-            feld[1] = Integer.parseInt(extras.getString("feld").substring(1,2));
+            feld[1] = Integer.parseInt(extras.getString("felder").substring(2,3));
             return;
         }
         throw new RuntimeException("Sollte nicht passieren!");
@@ -129,12 +130,11 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         button.setImageResource(pics[field.getCard(pos).getValue()]);
 
         if(previousCard != null) {
-            field.switchPlayer();
             setAcitiveButtons(false);
             if(field.isPair(pos, previousCard)) {
                 if(field.finished()) {
                     View root = findViewById(R.id.root);
-                    Snackbar.make(root, "Das Spiel ist aus!", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(root, "Gewonnen hat Spieler: " + field, Snackbar.LENGTH_LONG).show();
                     return;
                 }
                 setAcitiveButtons(true);
@@ -142,6 +142,7 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
                 closeCards(pos, previousCard);
             }
             previousCard = null;
+            field.switchPlayer();
         } else {
             previousCard = pos;
         }
