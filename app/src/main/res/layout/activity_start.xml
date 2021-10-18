@@ -45,7 +45,7 @@
             android:orientation="horizontal">
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/felder"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:entries="@array/felder"
@@ -61,16 +61,24 @@
             android:textColor="@color/black"
             android:textSize="25sp" />
 
-        <Spinner
-            android:id="@+id/spinner3"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spieler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:entries="@array/spieler" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="start"
             android:text="Start" />
 
     </LinearLayout>

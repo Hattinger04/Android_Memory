@@ -5,6 +5,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -24,14 +25,30 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
     private Position previousCard;
     private ImageButton[][] buttons;
 
+    private int[] feld;
+    private int anzSpieler;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_memory);
+
         pics = getPicsArray();
-        field = new Playground(2,5);
-        buttons = new ImageButton[2][5];
-        generateGrid(2, 5);
+        field = new Playground(feld[0],feld[1]);
+        buttons = new ImageButton[feld[0]][cofeld[1]];
+        generateGrid(feld[0],feld[1]);
+    }
+
+
+    public void getExtras() {
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            anzSpieler = Integer.parseInt(extras.getString("anzSpieler"));
+            feld[0] = Integer.parseInt(extras.getString("felder").substring(0,1));
+            feld[1] = Integer.parseInt(extras.getString("feld").substring(1,2));
+            return;
+        }
+        throw new RuntimeException("Sollte nicht passieren");
     }
 
     private void generateGrid(int nrRows, int nrCols) {
@@ -156,4 +173,6 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         Timer timer = new Timer();
         timer.schedule(new CloseTask(),1000);
     }
+
+
 }
