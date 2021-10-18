@@ -118,4 +118,12 @@ public class Playground {
         }
         return temp;
     }
+
+    public void reset() {
+        init();
+        for(int i = 0; i < score.length; i++) {
+            score[i] = 0;
+        }
+        whosOnTurn = 0;
+    }
 }
