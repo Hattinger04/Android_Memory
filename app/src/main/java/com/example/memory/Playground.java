@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -97,17 +99,23 @@ public class Playground {
                 '}';
     }
 
-    public HashMap<Set<Integer>, Integer> getWinner() {
-        int value = Integer.MIN_VALUE;
+    public HashMap<Integer, Integer> getWinner() {
         HashMap rangliste = new HashMap<String, Integer>();
         for(int i = 0; i < score.length; i++) {
             rangliste.put(i + 1, score[i]);
         }
 
-        HashMap<Set<Integer>,Integer> sorted =
-                (HashMap<Set<Integer>, Integer>) rangliste.entrySet().stream()
-                        .sorted(Map.Entry.comparingByValue());
+        List<Map.Entry<Integer, Integer>> list = new LinkedList<Map.Entry<Integer, Integer>>(rangliste.entrySet());
 
-        return sorted;
+        // Sortiere die Liste
+        Collections.sort(list, (o1, o2) -> (o1.getValue()).compareTo(o2.getValue()));
+
+        // Fuege Daten in neue HashMap ein
+        LinkedHashMap<Integer, Integer> temp = new LinkedHashMap<Integer, Integer>();
+        for (Map.Entry<Integer, Integer> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+            Log.d("Winner", aa.getKey() + " " + aa.getValue());
+        }
+        return temp;
     }
 }

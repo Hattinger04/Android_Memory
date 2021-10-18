@@ -133,9 +133,7 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
             setAcitiveButtons(false);
             if(field.isPair(pos, previousCard)) {
                 if(field.finished()) {
-                    View root = findViewById(R.id.root);
-                    Snackbar.make(root, "Gewonnen hat Spieler: " + field, Snackbar.LENGTH_LONG).show();
-                    return;
+                    gameFinished();
                 }
                 setAcitiveButtons(true);
             } else {
@@ -172,5 +170,23 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
 
         Timer timer = new Timer();
         timer.schedule(new CloseTask(),1000);
+    }
+
+    public void gameFinished() {
+        View root = findViewById(R.id.root);
+        Object[] player = field.getWinner().keySet().toArray();
+        Object[] values = field.getWinner().values().toArray();
+        int compareValue = Integer.MIN_VALUE;
+        int remis = 0;
+        for(int i = 0; i < values.length - 1; i++) {
+            remis = compareValue == (int) values[i] ? (int) values[i] : remis;
+        }
+
+        if(remis == compareValue) {
+            Snackbar.make(root, "Unentschieden, mehrere Spieler mit jeweils " + remis +" Punkten!", Snackbar.LENGTH_LONG).show();
+        } else {
+            Snackbar.make(root, "Gewonnen hat Spieler: " + player[player.length-1] + " mit " + values[values.length-1] + " Punkten!", Snackbar.LENGTH_LONG).show();
+        }
+        return;
     }
 }
