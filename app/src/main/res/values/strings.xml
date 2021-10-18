@@ -1,3 +1,10 @@
 <resources>
+    <string-array name="felder">
+        <item>4x3</item>
+        <item>4x4</item>
+        <item>5x4</item>
+        <item>6x5</item>
+        <item>7x5</item>
+    </string-array>
     <string name="app_name">Memory</string>
 </resources>
