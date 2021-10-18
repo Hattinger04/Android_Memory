@@ -2,7 +2,11 @@ package com.example.memory;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class Playground {
 
@@ -14,29 +18,34 @@ public class Playground {
     public Playground(int x, int y) {
         cards = new Card[x][y];
         init();
-        Log.d("Cards", " " + cards[x-1][y-1].getValue());
 
     }
 
-    // TODO: Funktioniert noch nicht? Falsches Konzept? Idee zurzeit nur noch mit geraden Arraylaengen
     public void init() {
-        int value = 0;
-        for(int i=0; i < cards.length;i++){
-            for(int j=0; j < cards[i].length - 1 ; j = j + 2) {
-                cards[i][j] = new Card();
-                cards[i][j+1] = new Card();
-                cards[i][j].setValue(value);
-                cards[i][j+1].setValue(value);
-                Log.d("Value", " " + cards[i][j].getValue() + " Value1: " + value);
-                Log.d("Value", " " + cards[i][j+1].getValue() + " Value2: " + value);
-                value++;
-            }
-            cards[i][cards[i].length - 1] = new Card();
-            cards[i][cards[i].length - 1].setValue(value);
-            value = (i != 0 || i % 2 == 0 ? value + 1 : value);
-            Log.d("Value", " Value3: " + cards[i][cards[i].length - 1].getValue());
-
+        List<Integer> liste = new ArrayList<Integer>();
+        int zaehler = 0;
+        int count = cards.length * cards[0].length;
+        for(int i=0; i < count; i = i + 2) {
+            liste.add(zaehler);
+            liste.add(zaehler);
+            zaehler++;
         }
+
+        Collections.shuffle(liste);
+
+        for (Integer list: liste) {
+            Log.d("Count", " " + list);
+        }
+
+        for(int i=0; i < cards.length;i++){
+            for(int j=0; j < cards[i].length; j++) {
+                cards[i][j] = new Card();
+                int value = liste.get(0);
+                liste.remove(0);
+                cards[i][j].setValue(value);
+            }
+        }
+
     }
 
     public Card play(Position position) {
