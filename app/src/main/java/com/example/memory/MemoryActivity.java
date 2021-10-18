@@ -24,13 +24,11 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
     private Position previousCard;
     private ImageButton[][] buttons;
 
-    // TODO: Muss nächstes mal die IDs der einzelnen Bilder setzen!
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_memory);
+        pics = getPicsArray();
         field = new Playground(6,5);
         buttons = new ImageButton[6][5];
         generateGrid(6, 5);
@@ -67,7 +65,7 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public static int[] getPicsArray() {
-        int[] c = new int[20];
+        int[] c = new int[21];
 
         c[0] = R.drawable.i000;
         c[1] = R.drawable.i001;
@@ -108,8 +106,8 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
             throw new RuntimeException("Darf nicht passieren");
         }
 
-       /*
-        button.setImageResource(getPicsArray()[field.getCard(pos).getValue()]);
+
+        button.setImageResource(pics[field.getCard(pos).getValue()]);
 
         if(previousCard != null) {
             if(field.isPair(pos, previousCard)) {
@@ -126,7 +124,7 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
             previousCard = pos;
         }
 
-        */
+
     }
 
     private void closeCards(Position pos1, Position pos2)

@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class Playground {
 
     private Card[][] cards;
-    // TODO: wie viele Spieler spielen? Wo abfragen?
+    // TODO: User kann Anzahl an Spielern noch nicht eingeben (selber schreiben!)
     private int whosOnTurn;
     private int[] score;
 
@@ -30,7 +30,6 @@ public class Playground {
                 Log.d("Value", " " + cards[i][j].getValue() + " Value1: " + value);
                 Log.d("Value", " " + cards[i][j+1].getValue() + " Value2: " + value);
                 value++;
-
             }
             cards[i][cards[i].length - 1] = new Card();
             cards[i][cards[i].length - 1].setValue(value);
@@ -57,12 +56,13 @@ public class Playground {
     }
 
     public boolean isPair(Position pos1, Position pos2) {
-        if(getCard(pos1).getValue() == getCard(pos2).getValue()) {
+       /* if(getCard(pos1).getValue() == getCard(pos2).getValue()) {
             score[whosOnTurn] = score[whosOnTurn] + 1;
-
             return true;
         }
         return false;
+        */
+        return true;
     }
 
     public Card getCard(Position position) {
