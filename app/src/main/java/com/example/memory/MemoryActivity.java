@@ -60,7 +60,6 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         button.setTag(position);
         button.setOnClickListener(this);
         buttons[position.x][position.y] = button;
-        Log.d("Pos", position.x + " " + position.y);
         return button;
     }
 
@@ -113,6 +112,7 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         button.setImageResource(pics[field.getCard(pos).getValue()]);
 
         if(previousCard != null) {
+            setAcitiveButtons(false);
             if(field.isPair(pos, previousCard)) {
                 if(field.finished()) {
                     View root = findViewById(R.id.root);
@@ -130,6 +130,15 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    private void setAcitiveButtons(boolean active) {
+        for(int i = 0; i < buttons.length; i++) {
+            for(int j = 0; j < buttons[i].length; j++) {
+                buttons[i][j].setClickable(active);
+            }
+        }
+    }
+
+
     private void closeCards(Position pos1, Position pos2)
     {
         class CloseTask extends TimerTask
@@ -139,6 +148,7 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
                 runOnUiThread(() -> {
                     buttons[pos1.x][pos1.y].setImageResource(R.drawable.back);
                     buttons[pos2.x][pos2.y].setImageResource(R.drawable.back);
+                    setAcitiveButtons(true);
                 });
             }
         }
@@ -146,6 +156,4 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         Timer timer = new Timer();
         timer.schedule(new CloseTask(),1000);
     }
-
-
 }

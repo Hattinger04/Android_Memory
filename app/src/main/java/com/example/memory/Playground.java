@@ -44,6 +44,7 @@ public class Playground {
 
     }
 
+    // TODO: was macht diese Methode?
     public Card play(Position position) {
 
         return getCard(position);
