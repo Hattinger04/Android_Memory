@@ -110,56 +110,45 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        ImageButton button = (ImageButton) view;
-        Position pos = null;
-        for(int i=0; i< buttons.length;i++){
-            for(int j=0; j<buttons[i].length; j++){
-               if(buttons[i][j].equals(button)) {
-                   pos = new Position(i, j);
-               }
-            }
-        }
-        if(pos == null) {
-            throw new RuntimeException("Darf nicht passieren");
-        }
-
-        if(field.getCard(pos).isVisible()) {
-            return;
-        }
-
-        button.setImageResource(pics[field.getCard(pos).getValue()]);
-
-        if(previousCard != null) {
-            setAcitiveButtons(false);
-<<<<<<< HEAD
-
-            switch (field.play(pos, previousCard)) {
-                case finished:
-                    View root = findViewById(R.id.root);
-                    Snackbar.make(root, "Das Spiel ist aus!", Snackbar.LENGTH_LONG).show();
-                    return;
-                case isPair:
-                    setAcitiveButtons(true);
-                    break;
-                case isNothing:
-                    closeCards(pos, previousCard);
-                    break;
-=======
-            if(field.isPair(pos, previousCard)) {
-                if(field.finished()) {
-                    gameFinished();
+            ImageButton button = (ImageButton) view;
+            Position pos = null;
+            for (int i = 0; i < buttons.length; i++) {
+                for (int j = 0; j < buttons[i].length; j++) {
+                    if (buttons[i][j].equals(button)) {
+                        pos = new Position(i, j);
+                    }
                 }
-                setAcitiveButtons(true);
-            } else {
-                closeCards(pos, previousCard);
->>>>>>> d8b0a0bd7758120a6e363f9e8790c1082bef4f77
             }
-            previousCard = null;
-            field.switchPlayer();
-        } else {
-            previousCard = pos;
+            if (pos == null) {
+                throw new RuntimeException("Darf nicht passieren");
+            }
+            if (field.getCard(pos).isVisible()) {
+                return;
+            }
+
+            button.setImageResource(pics[field.getCard(pos).getValue()]);
+
+            if (previousCard != null) {
+                field.switchPlayer();
+                setAcitiveButtons(false);
+
+                switch (field.play(pos, previousCard)) {
+                    case finished:
+                        View root = findViewById(R.id.root);
+                        Snackbar.make(root, "Das Spiel ist aus!", Snackbar.LENGTH_LONG).show();
+                        return;
+                    case isPair:
+                        setAcitiveButtons(true);
+                        break;
+                    case isNothing:
+                        closeCards(pos, previousCard);
+                        break;
+                }
+                previousCard = null;
+            } else {
+                previousCard = pos;
+            }
         }
-    }
 
     private void setAcitiveButtons(boolean active) {
         for(int i = 0; i < buttons.length; i++) {
