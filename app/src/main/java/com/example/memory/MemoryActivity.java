@@ -157,8 +157,7 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private void closeCards(Position pos1, Position pos2)
-    {
+    private void closeCards(Position pos1, Position pos2) {
         class CloseTask extends TimerTask
         {
             @Override
@@ -170,7 +169,6 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
                 });
             }
         }
-
         Timer timer = new Timer();
         timer.schedule(new CloseTask(),1000);
     }
@@ -179,14 +177,10 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         View root = findViewById(R.id.root);
         Object[] player = field.getWinner().keySet().toArray();
         Object[] values = field.getWinner().values().toArray();
-        int compareValue = Integer.MIN_VALUE;
-        int remis = 0;
-        for(int i = 0; i < values.length - 1; i++) {
-            remis = compareValue == (int) values[i] ? (int) values[i] : remis;
-        }
+        boolean remis = values[values.length - 1] == values[values.length - 2];
 
-        if(remis == compareValue) {
-            Snackbar.make(root, "Unentschieden, mehrere Spieler mit jeweils " + remis +" Punkten!", Snackbar.LENGTH_LONG).show();
+        if(remis) {
+            Snackbar.make(root, "Unentschieden!", Snackbar.LENGTH_LONG).show();
         } else {
             Snackbar.make(root, "Gewonnen hat Spieler: " + player[player.length-1] + " mit " + values[values.length-1] + " Punkten!", Snackbar.LENGTH_LONG).show();
         }
