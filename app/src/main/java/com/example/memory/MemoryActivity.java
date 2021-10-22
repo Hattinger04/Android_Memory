@@ -134,8 +134,7 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
 
                 switch (field.play(pos, previousCard)) {
                     case finished:
-                        View root = findViewById(R.id.root);
-                        Snackbar.make(root, "Das Spiel ist aus!", Snackbar.LENGTH_LONG).show();
+                        gameFinished();
                         return;
                     case isPair:
                         setAcitiveButtons(true);

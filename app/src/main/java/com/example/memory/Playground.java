@@ -133,7 +133,6 @@ public class Playground {
         LinkedHashMap<Integer, Integer> temp = new LinkedHashMap<Integer, Integer>();
         for (Map.Entry<Integer, Integer> aa : list) {
             temp.put(aa.getKey(), aa.getValue());
-            Log.d("Winner", aa.getKey() + " " + aa.getValue());
         }
         return temp;
     }
