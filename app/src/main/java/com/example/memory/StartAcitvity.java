@@ -25,8 +25,7 @@ public class StartAcitvity extends AppCompatActivity {
         String feld = (String) felder.getSelectedItem();
         String anzSpieler = (String) spieler.getSelectedItem();
 
-
-        Intent intent = new Intent(this, StartAcitvity.class);
+        Intent intent = new Intent(this, MemoryActivity.class);
         intent.putExtra("felder", feld);
         intent.putExtra("anzSpieler", anzSpieler);
         startActivity(intent);

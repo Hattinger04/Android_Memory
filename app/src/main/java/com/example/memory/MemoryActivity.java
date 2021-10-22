@@ -42,10 +42,11 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
 
     public void getExtras() {
         Bundle extras = getIntent().getExtras();
+        feld = new int[2];
         if(extras != null) {
             anzSpieler = Integer.parseInt(extras.getString("anzSpieler"));
             feld[0] = Integer.parseInt(extras.getString("felder").substring(0,1));
-            feld[1] = Integer.parseInt(extras.getString("feld").substring(1,2));
+            feld[1] = Integer.parseInt(extras.getString("felder").substring(2,3));
             return;
         }
         throw new RuntimeException("Sollte nicht passieren!");
@@ -129,8 +130,8 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         button.setImageResource(pics[field.getCard(pos).getValue()]);
 
         if(previousCard != null) {
-            field.switchPlayer();
             setAcitiveButtons(false);
+<<<<<<< HEAD
 
             switch (field.play(pos, previousCard)) {
                 case finished:
@@ -143,8 +144,18 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
                 case isNothing:
                     closeCards(pos, previousCard);
                     break;
+=======
+            if(field.isPair(pos, previousCard)) {
+                if(field.finished()) {
+                    gameFinished();
+                }
+                setAcitiveButtons(true);
+            } else {
+                closeCards(pos, previousCard);
+>>>>>>> d8b0a0bd7758120a6e363f9e8790c1082bef4f77
             }
             previousCard = null;
+            field.switchPlayer();
         } else {
             previousCard = pos;
         }
@@ -174,5 +185,23 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
 
         Timer timer = new Timer();
         timer.schedule(new CloseTask(),1000);
+    }
+
+    public void gameFinished() {
+        View root = findViewById(R.id.root);
+        Object[] player = field.getWinner().keySet().toArray();
+        Object[] values = field.getWinner().values().toArray();
+        int compareValue = Integer.MIN_VALUE;
+        int remis = 0;
+        for(int i = 0; i < values.length - 1; i++) {
+            remis = compareValue == (int) values[i] ? (int) values[i] : remis;
+        }
+
+        if(remis == compareValue) {
+            Snackbar.make(root, "Unentschieden, mehrere Spieler mit jeweils " + remis +" Punkten!", Snackbar.LENGTH_LONG).show();
+        } else {
+            Snackbar.make(root, "Gewonnen hat Spieler: " + player[player.length-1] + " mit " + values[values.length-1] + " Punkten!", Snackbar.LENGTH_LONG).show();
+        }
+        return;
     }
 }

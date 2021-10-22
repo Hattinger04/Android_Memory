@@ -4,8 +4,17 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.stream.Stream;
 
 public class Playground {
 
@@ -43,8 +52,8 @@ public class Playground {
     }
 
     public void switchPlayer() {
-        if(whosOnTurn > score.length) {
-            whosOnTurn = 1;
+        if(whosOnTurn >= score.length - 1) {
+            whosOnTurn = 0;
         } else {
             whosOnTurn++;
         }
@@ -107,5 +116,33 @@ public class Playground {
                 ", whosOnTurn=" + whosOnTurn +
                 ", score=" + Arrays.toString(score) +
                 '}';
+    }
+
+    public HashMap<Integer, Integer> getWinner() {
+        HashMap rangliste = new HashMap<String, Integer>();
+        for(int i = 0; i < score.length; i++) {
+            rangliste.put(i + 1, score[i]);
+        }
+
+        List<Map.Entry<Integer, Integer>> list = new LinkedList<Map.Entry<Integer, Integer>>(rangliste.entrySet());
+
+        // Sortiere die Liste
+        Collections.sort(list, (o1, o2) -> (o1.getValue()).compareTo(o2.getValue()));
+
+        // Fuege Daten in neue HashMap ein
+        LinkedHashMap<Integer, Integer> temp = new LinkedHashMap<Integer, Integer>();
+        for (Map.Entry<Integer, Integer> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+            Log.d("Winner", aa.getKey() + " " + aa.getValue());
+        }
+        return temp;
+    }
+
+    public void reset() {
+        init();
+        for(int i = 0; i < score.length; i++) {
+            score[i] = 0;
+        }
+        whosOnTurn = 0;
     }
 }
