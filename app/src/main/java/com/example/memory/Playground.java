@@ -42,7 +42,6 @@ public class Playground {
 
     }
 
-    // TODO: eigentlich "play" Methode, war aber verwirrt, was diese Methode machen soll?
     public void switchPlayer() {
         if(whosOnTurn > score.length) {
             whosOnTurn = 1;
@@ -79,6 +78,26 @@ public class Playground {
 
     public void setScore(int[] score) {
         this.score = score;
+    }
+
+    /**
+     * Methode soll ausgefuehrt werden, wenn man 2 verschiedene
+     * Karten aufgedeckt hat
+     *
+     * Gibt Enum "Status" Wert zurueck
+     *
+     * @param card
+     * @param previousCard
+     */
+    public Status play(Position card, Position previousCard) {
+        switchPlayer();
+        if(isPair(card, previousCard)) {
+            if(finished()) {
+                return Status.finished;
+            }
+            return Status.isPair;
+        }
+        return Status.isNothing;
     }
 
     @Override

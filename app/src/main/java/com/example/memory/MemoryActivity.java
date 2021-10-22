@@ -131,15 +131,18 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         if(previousCard != null) {
             field.switchPlayer();
             setAcitiveButtons(false);
-            if(field.isPair(pos, previousCard)) {
-                if(field.finished()) {
+
+            switch (field.play(pos, previousCard)) {
+                case finished:
                     View root = findViewById(R.id.root);
                     Snackbar.make(root, "Das Spiel ist aus!", Snackbar.LENGTH_LONG).show();
                     return;
-                }
-                setAcitiveButtons(true);
-            } else {
-                closeCards(pos, previousCard);
+                case isPair:
+                    setAcitiveButtons(true);
+                    break;
+                case isNothing:
+                    closeCards(pos, previousCard);
+                    break;
             }
             previousCard = null;
         } else {
