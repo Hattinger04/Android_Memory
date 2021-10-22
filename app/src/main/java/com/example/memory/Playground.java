@@ -1,20 +1,14 @@
 package com.example.memory;
 
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.stream.Stream;
 
 public class Playground {
 
@@ -118,6 +112,12 @@ public class Playground {
                 '}';
     }
 
+    /**
+     * Gibt eine HashMap mit allen Spielern und Werten zurueck
+     * Key: String - Spielernummer
+     * Value: Integer - Anzahl an Paaren
+     * @return
+     */
     public HashMap<Integer, Integer> getWinner() {
         HashMap rangliste = new HashMap<String, Integer>();
         for(int i = 0; i < score.length; i++) {
@@ -137,10 +137,20 @@ public class Playground {
         return temp;
     }
 
+    // Wird nicht gebraucht, kann jedoch relativ nutzvoll sein -> nicht getestet!
+
+    /**
+     * Reseted alle im Playground gesetzte Variablen
+     */
     public void reset() {
         init();
         for(int i = 0; i < score.length; i++) {
             score[i] = 0;
+        }
+        for(int i = 0; i < cards.length; i++) {
+            for(int j = 0; j < cards[i].length; i++) {
+                cards[i][j].setVisible(false);
+            }
         }
         whosOnTurn = 0;
     }
